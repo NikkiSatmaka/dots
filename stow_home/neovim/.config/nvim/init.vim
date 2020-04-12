@@ -259,7 +259,7 @@ nnoremap <silent> <A-l> :tabnext<CR>
 
 " }}}
 
-" Key settings {{{
+" Basic file system bindings {{{
 nnoremap gl $
 nnoremap gh 0
 " nnoremap gk H
@@ -286,7 +286,7 @@ map <A-p> :PlugInstall<CR>
 map <C-n> :NERDTreeToggle<CR>
 "map <C-N> :NERDTreeFind<CR>
 map <C-q> :!wc -w %<CR>
-map <C-d> ggO---<ESC>odate:<ESC>:r!date "+\%F"<CR>kJo---<ESC>o
+map <A-t> ggO---<ESC>odate:<ESC>:r!date "+\%F"<CR>kJo---<ESC>o
 map <A-d> o DATE: <ESC>:r!date "+\%x"<CR>kJA BY: NikkiSatmaka<ESC>kJA
 map <leader>p :!zathura %:r.pdf &<CR><CR>
 map <leader>o :!pandoc % -t beamer -o %:r.pdf &<CR><CR>
