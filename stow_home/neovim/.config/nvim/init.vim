@@ -50,18 +50,24 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'davidhalter/jedi-vim'
 	Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
+" }}}
 
-" some pluing specific things
+" Basic {{{
+set nocompatible
+let mapleader =" "
+" }}}
+
+" Some plugin specific things {{{
 let g:rainbow_active = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#wordcount#enabled = 1
-let g:airline_theme = 'base16_tomorrow'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#wordcount#enabled = 1
+" let g:airline_theme = 'base16_tomorrow'
 
-" let g:lightline = {
-"       \ 'colorscheme': 'Tomorrow_Night',
-"       \ }
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night',
+      \ }
 
 let g:jedi#usages_command = "<A>z"
 let g:jedi#popup_on_dot = 1
@@ -89,7 +95,6 @@ let g:rbpt_loadcmd_toggle = 0
 " UI {{{
 syntax enable
 filetype plugin indent on
-let mapleader =" "
 set number
 set relativenumber
 set modelines=1
@@ -103,20 +108,18 @@ set wrapmargin=0
 set wrapscan
 set backspace=indent,eol,start
 set background=dark
+set guioptions=a
 set showmatch
 call matchadd('ColorColumn', '\%81v', 100)
 nnoremap <leader>= :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
+nnoremap <leader>h :split<Space>
+nnoremap <leader>v :vsplit<Space>
 set splitbelow
 set splitright
 set termguicolors
-colorscheme base16-tomorrow-night
-" colorscheme miniml
-" colorscheme inkpot
-" colorscheme solarized
-" colorscheme jellybeans
-" colorscheme kuroi
 set t_Co=256
+colorscheme base16-tomorrow-night
 
 " Syntastic recommends
 set statusline+=%#warningmsg#
@@ -124,7 +127,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " }}}
 
@@ -134,6 +137,8 @@ nnoremap <leader><space> :nohlsearch<CR>
 set hlsearch
 " S for find and replace.
 nnoremap S :%s//g<Left><Left>
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " }}}
 
 " Section Folding {{{
@@ -183,8 +188,7 @@ let g:tex_flavor = "latex"
 set encoding=utf-8
 set nowritebackup
 set nobackup
-set history=10
-set nocompatible
+set history=500
 set noshowmode
 set linebreak
 set list
@@ -213,7 +217,7 @@ set statusline+=\ L:%l/%L        " Current line vs lines number
 " }}}
 
 " CTRLP Plugin {{{
-"let g:ctrlp_map = '<c-p>'
+"let g:ctrlp_map = '<C-p>'
 "let g:ctrlp_cmd = 'CtrlP'
 "let g:ctrlp_working_path_mode = 'ra'
 "let g:ctrlp_switch_buffer = 'et'
@@ -233,13 +237,13 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+imap <C-x><C-k> <plug>(fzf-complete-word)
+imap <C-x><C-f> <plug>(fzf-complete-path)
+imap <C-x><C-j> <plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <plug>(fzf-complete-line)
 
 " Advanced customization using Vim function
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+inoremap <expr> <C-x><C-k> fzf#vim#complete#word({'left': '15%'})
 
 "}}}
 
@@ -256,10 +260,24 @@ nnoremap <silent> <A-l> :tabnext<CR>
 " }}}
 
 " Key settings {{{
-noremap <C-J> <C-W><C-J>
-noremap <C-K> <C-W><C-K>
-noremap <C-L> <C-W><C-L>
-noremap <C-H> <C-W><C-H>
+nnoremap gl $
+nnoremap gh 0
+" nnoremap gk H
+" nnoremap gj L
+
+map Y y$
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <leader>q :wq<CR>
+nnoremap <leader>w :w<CR>
+" }}}}
+
+" Key settings {{{
+noremap <C-j> <C-W><C-J>
+noremap <C-k> <C-W><C-K>
+noremap <C-h> <C-W><C-H>
+noremap <C-l> <C-W><C-L>
 
 command WQ wq
 command W w
@@ -268,14 +286,13 @@ map <A-p> :PlugInstall<CR>
 map <C-n> :NERDTreeToggle<CR>
 "map <C-N> :NERDTreeFind<CR>
 map <C-q> :!wc -w %<CR>
-map <C-d> ggO---<ESC>odate:<ESC>:r!date "+\%F"<ESC>kJo---<ESC>o
-map <A-d> o DATE: <ESC>:r!date "+\%x"<ESC>kJA BY: HexDSL@posteo.net<ESC>kJA
+map <C-d> ggO---<ESC>odate:<ESC>:r!date "+\%F"<CR>kJo---<ESC>o
+map <A-d> o DATE: <ESC>:r!date "+\%x"<CR>kJA BY: NikkiSatmaka<ESC>kJA
 map <leader>p :!zathura %:r.pdf &<CR><CR>
 map <leader>o :!pandoc % -t beamer -o %:r.pdf &<CR><CR>
 "map <leader>c :!setsid vim_compile %<CR><CR>
-map <leader>c :!setsid auto_vim_compile % &<CR><CR>
-nnoremap j gj
-nnoremap k gk
+" map <leader>c :!setsid auto_vim_compile % &<CR><CR>
+map <leader>f :Goyo \| set bg=dark \| set linebreak<CR>
 " }}}}
 
 " Auto -  file types {{{
@@ -336,6 +353,25 @@ autocmd BufRead,BufNewFile *.tex set filetype=tex
 	autocmd FileType tex inoremap ,ss \subsection{}<++><Esc>4hi
 	autocmd FileType tex inoremap ,p  \paragraph{Paragraph}<Esc>
 	autocmd FileType tex inoremap ,im \begin{figure}<Enter>  \includegraphics[width=\linewidth]{}<Enter>\caption{<++>}<Enter>\label{<++>}<Enter>\end{figure}<Enter><++><Esc>4k%2li
+" }}}
+
+" Helper functions {{{
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
