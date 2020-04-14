@@ -67,6 +67,9 @@ pulseaudio-bluetooth
 zathura
 zathura-pdf-mupdf
 
+# media
+youtube-dl
+
 # docs
 man-pages
 xorg-docs
