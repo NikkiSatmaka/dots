@@ -1,0 +1,16 @@
+# FOLDERS  #
+h	$HOME/
+d	$HOME/downloads
+D	$HOME/documents
+m	$HOME/music
+p	$HOME/pictures
+v	$HOME/videos
+b	$HOME/.local/bin
+bs	$HOME/.local/bin/shortcuts
+cf	${XDG_CONFIG_HOME:-$HOME/.config}
+ss	$HOME/pictures/screenshots
+dx	$HOME/Dropbox
+o	$HOME/dots
+bos	$HOME/Dropbox/Documents/BOS
+st	/storage
+mn	/mnt

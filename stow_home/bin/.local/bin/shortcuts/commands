@@ -1,0 +1,159 @@
+#!/bin/sh
+
+# Copy output of last command
+alias c='"$(history | tail -2 | sed "s/  [0-9]*  //;2d")" > /tmp/cmdoutput && cat /tmp/cmdoutput | xsel -b && notify-send "Terminal" "Ouput Copied"'
+
+# trash command
+alias trp='trash-put'
+alias tre='trash-empty'
+alias trl='trash-list'
+alias trr='trash-restore'
+alias trm='trash-rm'
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm='echo "Use trp to trash files"; false'
+alias mkd="mkdir -pv"
+alias yt="youtube-dl --add-metadata -i"
+alias yta="yt -x -f bestaudio/best"
+alias ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+#alias l='lsd -hA --group-dirs first'
+alias ls='exa -Fh --group-directories-first'
+alias la='exa -Fha --group-directories-first'
+alias ll='exa -Fhla --group-directories-first'
+alias lsdf='exa -Fha .*(.)'
+alias spt='launchspt'
+alias grep='grep --color=auto'
+alias diff="diff --color=auto" \
+alias ccat="highlight --out-format=ansi"
+
+# Some other stuff
+alias magit="nvim -c MagitOnly"
+alias ref="shortcuts >/dev/null; source $HOME/.local/bin/shortcuts/shortcuts; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc"
+# alias weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
+alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
+
+# Application aliases
+alias f="$FILE"
+alias e="$EDITOR"
+alias v="$EDITOR"
+alias v="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias p="pandoc"
+alias m="mpv"
+alias r="ranger"
+alias trc="transmission-remote-cli"
+alias trss="transmission-rss"
+alias xup="xrdb .Xresources"
+alias pman="sudo pacman"
+alias pip="sudo pip"
+alias jp="joplin"
+
+# These common commands are just too long! Abbreviate them.
+alias ka="killall"
+alias trem="transmission-remote"
+alias YT="youtube-viewer"
+alias sdn="sudo shutdown -h now"
+
+# git aliases
+alias g='git'
+alias gst='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gpl='git pull'
+alias gpom='git pull origin master'
+alias gpu='git push'
+alias gd='git diff'
+alias gch='git checkout'
+alias gnb='git checkout -b'
+alias gac='git add . && git commit'
+alias grs='git restore --staged .'
+alias gre='git restore'
+alias gr='git remote'
+alias gcl='git clone'
+alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias gt='git ls-tree -r master --name-only'
+alias grm='git remote'
+alias gb='git branch'
+alias gm='git merge'
+alias gf='git fetch'
+
+# Angular aliases
+alias ngs='ng serve'
+alias ngt='ng test'
+alias nggc='ng generate component'
+alias nggs='ng generate service'
+
+# Restore apps
+alias restoreapps="yay -S --needed - < ~/.restore/applist"
+alias restorestow="cd ~/dots/stow_home ; for d in *;do stow -t ~ $d; done"
+alias restorestowroot="cd ~/dots/stow_root ;_for d in *;do stow -t / $d; done"
+
+# Hexdsl Alias --------------------------------------------
+alias blame-plot="systemd-analyze plot >plot.svg"
+alias blame="systemd-analyze blame"
+alias cal="cal -Y"
+
+alias beepspk="echo -ne "\007""
+alias gccbest="gcc -c -Q -march=native --help=target"
+# alias calcurse="CALCURSE_CALDAV_PASSWORD=$(pass show posteo.de|head -n1) calcurse-caldav --init=keep-remote"
+alias ch="chmod +x"
+alias clean="cleanupdate"
+alias jpg2webp="for f in *.jpg; do cwebp "$f" -o "$(basename -- "$f" .jpg).webp"; done"
+alias png2webp="for f in *.png; do cwebp "$f" -o "$(basename -- "$f" .png).webp"; done"
+
+alias cpuspeed="watch grep \"cpu MHz\" /proc/cpuinfo"
+alias df="df -h"
+alias dig="drill"
+alias fake1g="fallocate -l 1G test.img"
+alias fe="fzf | xargs -r -I % $EDITOR %"
+alias fixsum="updpkgsums"
+alias free="free -h"
+alias gameserverdrive="sshfs root@68.183.36.163:/root/ /storage/gameserver"
+alias gameserver="ssh -v root@68.183.36.163"
+alias glhack="glhack --windowed"
+alias googledrive="google-drive-ocamlfuse /mnt/google"
+alias gopherdrive="sshfs hexdsl@206.189.5.169:/home/hexdsl/gopher/ /storage/gopher"
+
+alias handbrake="ghb"
+
+# Apps aliases
+alias listaur="pacman -Qm"
+#alias paci="sudo pacman -Qi"
+alias paci="yay -Qeq | fzf -m --preview "yay -Qi {1}" | xargs -ro yay -Rs"
+alias rank="sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist"
+
+alias motherboard="cat /sys/devices/virtual/dmi/id/board_{vendor,name,version}"
+
+alias myip="curl http://ipecho.net/plain; echo"
+alias netusage="vnstat"
+alias parrot="curl parrot.live"
+alias pass="PASSWORD_STORE_ENABLE_EXTENSIONS=true pass"
+alias pg="pwgen -cnBy 15"
+alias pgx="cat /dev/urandom | tr -dc "[:print:]" | tr -d "[:space:]" | fold -w 25 | grep -E "[A-Z].[0-9].[^a-zA-Z\d]" | head -n 5"
+alias ping="ping -c 3"
+alias q="exit"
+alias rr="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
+alias se="fd -tf .  ~/.bin/ ~/.config | fzf | xargs -r $EDITOR"
+alias S="sudo systemctl"
+alias s="systemctl --user"
+alias suckclean="make clean && rm -f config.h && git reset --hard origin/master"
+alias sxiv="sxiv -a -b"
+alias tar-make="tar -cvzf"
+alias top="htop"
+alias tree="tree -C"
+alias tty-clock="tty-clock -c -b -f "%a %d %b" -C 5"
+alias unixtime="date +%s"
+#alias uptime="tuptime"
+alias webgallery="for f in *.webp; do echo "<img src=\"/images/gallery/$f\" />" >> gallery.html; done"
+alias whats="apropos"
+alias which="where"
+alias xevkb="xev -event keyboard | egrep -o "(keycode(.)+\)|XLookup.+[1-9].+)""
+alias xpgopher="ssh hexdsl@206.189.5.169"
+alias rofitop="rofi -show top -modi top"
+alias xp="xprop | grep -E "^(WM_CLASS|_NET_WM_NAME|WM_NAME)""
+alias instagram="instaloader --no-video-thumbnails --no-metadata-json --no-captions"
