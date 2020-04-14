@@ -31,7 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
 	Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-	Plugin 'junegunn/limelight.vim', { 'on': 'Goyo' }
+	Plug 'junegunn/limelight.vim', { 'on': 'Goyo' }
 "{{ Tim Pope Plugins }}
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-commentary'
