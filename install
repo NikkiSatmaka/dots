@@ -108,7 +108,7 @@ mkxdg()
 
 movbg()
 	{
-		mv ~/dots/black_hole_gateway_4k-1920x1080.jpg ~/pictures/wallpapers/black_hole_gateway_4k-1920x1080.jpg
+		cp -iv ~/dots/black_hole_gateway_4k-1920x1080.jpg ~/pictures/wallpapers/black_hole_gateway_4k-1920x1080.jpg
 	}
 
 pass()
