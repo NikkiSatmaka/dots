@@ -1,0 +1,10 @@
+# FILES #
+sd	~/.bin/shortcuts/folders
+sf	~/.bin/shortcuts/files
+sc	~/.bin/shortcuts/commands
+sb	~/.config/bspwm/bspwmrc
+sx	~/.config/sxhkd/sxhkdrc
+sz	~/.zshrc
+sv	~/.config/nvim/init.vim
+sr	~/.config/ranger/rc.conf
+sqb	~/.config/qutebrowser/config.py
