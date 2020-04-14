@@ -70,7 +70,7 @@ webs()
 dots()
 	{
 		cd ~
-		git clone https://github.com/NikkiSatmaka/dotfiles.git
+		git clone https://github.com/NikkiSatmaka/dots.git
 	}
 
 stow()
@@ -80,7 +80,7 @@ stow()
 
 	#setup ~ stow files
 	rm ~/.config/mimeapps.list &
-	cd ~/dotfiles/stow_home
+	cd ~/dots/stow_home
 	for d in *; do stow -t ~ $d ;done
 
 
