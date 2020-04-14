@@ -18,7 +18,7 @@ super + Escape
 
 # Reload wallpaper
 super + alt + w
-	feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpapers
+	feh --bg-fill --no-fehbg --randomize ~/pictures/wallpapers
 
 # Screenshots
 Print

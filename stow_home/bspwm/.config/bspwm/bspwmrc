@@ -60,5 +60,5 @@ bspc rule -a Zathura state=tiled
 killall -w sxhkd picom &
 sleep 0.1
 picom &
-feh --bg-fill --no-fehbg --randomize ~/Pictures/wallpapers
+feh --bg-fill --no-fehbg --randomize ~/pictures/wallpapers
 sxhkd

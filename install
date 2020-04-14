@@ -13,6 +13,8 @@ menu()
 		echo "stow:    Restore Stow form dots"
 		echo "aur:     Use 'yay' to install all Hex's applications"
 		echo "apps:    Use 'pacman' to install all Hex's applications"
+		echo "mkxdg:   Create xdg user base directories"
+		echo "movbg:   Set default background"
 		echo "syms:    THIS WILL DELETE FOLDERS YOU ARE USING! (uses Dropbox!)"
 		echo "dwm:     Pulls down Hex's DWM repo (uses branches)"
 		echo "webs:    Pulls down Hex's websites from git (You don't need this)"
@@ -76,10 +78,10 @@ dots()
 stow()
 	{
 	#Remove old MimeTypes list (Because X11 puts it back all the time!)
-	rm ~/.config/mimeapps.list
+	# rm ~/.config/mimeapps.list
 
 	#setup ~ stow files
-	rm ~/.config/mimeapps.list &
+	# rm ~/.config/mimeapps.list &
 	cd ~/dots/stow_home
 	for d in *; do stow -t ~ $d ;done
 
@@ -96,6 +98,17 @@ aur()
 apps()
 	{
 		test -f ~/pkgs-arch && sudo pacman -S --needed - < ~/pkgs-arch || echo "Do dots & stow first dude!"
+	}
+
+mkxdg()
+	{
+		cd ~
+		mkdir -pv ~/downloads ~/documents ~/music ~/pictures ~/pictures/screenshots ~/pictures/wallpapers ~/videos
+	}
+
+movbg()
+	{
+		mv ~/dots/black_hole_gateway_4k-1920x1080.jpg ~/pictures/wallpapers/black_hole_gateway_4k-1920x1080.jpg
 	}
 
 pass()
