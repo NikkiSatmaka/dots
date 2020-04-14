@@ -2,11 +2,12 @@
 
 # Default programs:
 export EDITOR="nvim"
-if [ -n "$DISPLAY" ]; then
-	export BROWSER="brave"
-else
-	export BROWSER="w3m"
-fi
+export BROWSER="brave"
+# if [ -n "$DISPLAY" ]; then
+# 	export BROWSER="brave"
+# else
+# 	export BROWSER="w3m"
+# fi
 export TERMINAL="alacritty"
 export READER="zathura"
 export WM="bspwm"
@@ -19,7 +20,6 @@ export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export LESSHISTFILE="-"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
 #export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
