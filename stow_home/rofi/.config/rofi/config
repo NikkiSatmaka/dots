@@ -1,1 +1,1 @@
-rofi.theme: ~/.config/rofi/themes/onedark.rasi
+rofi.theme: $XDG_CONFIG_HOME/rofi/themes/onedark.rasi
