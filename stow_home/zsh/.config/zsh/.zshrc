@@ -12,9 +12,9 @@ SAVEHIST=10000
 HISTFILE=$XDG_CACHE_HOME/zsh/history
 
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.local/bin/shortcuts/shortcuts" ] && source "$HOME/.local/bin/shortcuts/shortcuts"
-[ -f "$HOME/.local/bin/shortcuts/commands" ] && source "$HOME/.local/bin/shortcuts/commands"
-[ -f "$HOME/.local/bin/shortcuts/zshnameddirs" ] && source "$HOME/.local/bin/shortcuts/zshnameddirs"
+[ -f "$XDG_CONFIG_HOME/shortcuts/shortcuts" ] && source "$XDG_CONFIG_HOME/shortcuts/shortcuts"
+[ -f "$XDG_CONFIG_HOME/shortcuts/commands" ] && source "$XDG_CONFIG_HOME/shortcuts/commands"
+[ -f "$XDG_CONFIG_HOME/shortcuts/zshnameddirs" ] && source "$XDG_CONFIG_HOME/shortcuts/zshnameddirs"
 
 # Basic auto/tab complete:
 autoload -U compinit

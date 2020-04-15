@@ -6,8 +6,8 @@ m	$HOME/music
 p	$HOME/pictures
 v	$HOME/videos
 b	$HOME/.local/bin
-bs	$HOME/.local/bin/shortcuts
 cf	${XDG_CONFIG_HOME:-$HOME/.config}
+cs	${XDG_CONFIG_HOME:-$HOME/.config}/shortcuts
 ss	$HOME/pictures/screenshots
 dx	$HOME/Dropbox
 o	$HOME/dots

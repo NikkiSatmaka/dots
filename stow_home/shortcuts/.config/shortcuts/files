@@ -1,7 +1,7 @@
 # FILES #
-sd	$HOME/.local/bin/shortcuts/directories
-sf	$HOME/.local/bin/shortcuts/files
-sc	$HOME/.local/bin/shortcuts/commands
+sd	$XDG_CONFIG_HOME/shortcuts/directories
+sf	$XDG_CONFIG_HOME/shortcuts/files
+sc	$XDG_CONFIG_HOME/shortcuts/commands
 sb	$XDG_CONFIG_HOME/bspwm/bspwmrc
 sx	$XDG_CONFIG_HOME/sxhkd/sxhkdrc
 sz	$ZDOTDIR/.zshrc

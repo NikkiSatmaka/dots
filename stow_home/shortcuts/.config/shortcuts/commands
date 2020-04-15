@@ -32,7 +32,7 @@ alias diff="diff --color=auto" \
 
 # Some other stuff
 alias magit="nvim -c MagitOnly"
-# alias ref="shortcuts >/dev/null; source "$HOME/.local/bin/shortcuts/shortcuts"; source "$HOME/.local/bin/shortcuts/commands"; source $HOME/.local/bin/shortcuts/zshnameddirs"
+# alias ref="shortcuts >/dev/null; source "$XDG_CONFIG_HOME/shortcuts/shortcuts"; source "$XDG_CONFIG_HOME/shortcuts/commands"; source $XDG_CONFIG_HOME/shortcuts/zshnameddirs"
 # alias weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
 alias tmux="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
 
