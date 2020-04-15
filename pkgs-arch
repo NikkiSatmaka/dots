@@ -136,6 +136,7 @@ incron
 iproute2
 networkmanager
 network-manager-applet
+dnscrypt-proxy
 wget
 curl
 nmap
