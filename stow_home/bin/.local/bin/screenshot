@@ -1,8 +1,8 @@
 #!/bin/sh
 # Simple script that uses maim to take a screenshot
 
-output=$HOME/Pictures/screenshots/"$(date '+%y%m%d-%H%M-%S').png"
-# output=$HOME/Pictures/screenshots/"$(date '+%F_%H%M%S').png"
+output=$HOME/pictures/screenshots/"$(date '+%y%m%d-%H%M-%S').png"
+# output=$HOME/pictures/screenshots/"$(date '+%F_%H%M%S').png"
 
 menu() {
     echo "" | rofi -dmenu -p "How Long?" | xargs -I _ sleep "_"
