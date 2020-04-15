@@ -23,7 +23,7 @@ stopcomp() {
 startcomp() {
     stopcomp
     # Example settings only. Replace with your own.
-    picom -b --backend xrender  &
+    picom -b &
     exit
 }
 

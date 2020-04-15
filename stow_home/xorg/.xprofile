@@ -14,7 +14,7 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 remaps &			# run the remaps script, switching caps/esc and more; check it for more info
 # xrdb -merge ~/.Xresources &	# Xresources colors/settings on startup
 # xmodmap ~/.Xmodmap		# Xmodmap settings on startup
-picom &				# picom for transparency
+picom -b &				# picom for transparency
 dunst &				# dunst for notifications
 udiskie &			# udiskie for automount
 unclutter &			# Remove mouse when idle
