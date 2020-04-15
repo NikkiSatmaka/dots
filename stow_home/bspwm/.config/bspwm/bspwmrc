@@ -9,7 +9,7 @@ padding=$borderbase
 
 #### Set Coloring ####
 unfocused="#1d1f21"
-focused="#ffffff"
+focused="#81a2be"
 select="#b294bb"
 urgent="#cc6666"
 
@@ -67,8 +67,5 @@ bspc rule -a mpv state=pseudo_tiled
 bspc rule -a Zathura state=tiled
 
 ###---Autostart---###
-killall -w sxhkd picom &
-sleep 0.1
-picom -b &
 feh --bg-fill --no-fehbg --randomize ~/pictures/wallpapers
-sxhkd
+launchpolybar
