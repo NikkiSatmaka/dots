@@ -34,6 +34,13 @@ super + Print
 	screenshot selecttime
 
 #####################
+# System Control
+#####################
+
+super + shift + c
+	toggleprogram "picom" "-b"
+
+#####################
 # XF86 keys
 #####################
 
