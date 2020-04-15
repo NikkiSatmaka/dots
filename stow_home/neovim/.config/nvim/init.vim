@@ -120,6 +120,7 @@ set splitright
 set termguicolors
 set t_Co=256
 colorscheme base16-tomorrow-night
+highlight Normal guibg=NONE ctermbg=NONE
 
 " Syntastic recommends
 set statusline+=%#warningmsg#
@@ -202,7 +203,7 @@ set viminfo^=%
 set grepprg=grep\ -nH\ $*
 set noerrorbells visualbell t_vb=
 map Q gq
-autocmd VimLeave * !pkill -9 "entr"
+" autocmd VimLeave * !pkill -9 "entr"
 "match Error /\t/
 " }}}
 
@@ -278,9 +279,6 @@ noremap <C-j> <C-W><C-J>
 noremap <C-k> <C-W><C-K>
 noremap <C-h> <C-W><C-H>
 noremap <C-l> <C-W><C-L>
-
-command WQ wq
-command W w
 
 map <A-p> :PlugInstall<CR>
 map <C-n> :NERDTreeToggle<CR>
