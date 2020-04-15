@@ -12,6 +12,10 @@ super + Return
 super + @space
 	rofi -m -1 -show run
 
+# Emoji Launcher
+super + shift + d
+	dmenu_emoji
+
 # Reload this sxhkd config file
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -37,8 +41,9 @@ super + Print
 # System Control
 #####################
 
-super + shift + c
-	toggleprogram "picom" "-b"
+# compositor
+super + {_,shift + }c
+	{checkcomp,comptoggle}
 
 #####################
 # XF86 keys
@@ -119,7 +124,7 @@ super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
+super + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
