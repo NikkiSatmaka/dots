@@ -1,9 +1,9 @@
 hash -d h=$HOME/
-hash -d d=$HOME/downloads
-hash -d D=$HOME/documents
-hash -d m=$HOME/music
-hash -d p=$HOME/pictures
-hash -d v=$HOME/videos
+hash -d D=$HOME/downloads
+hash -d d=$HOME/documents
+hash -d mm=$HOME/music
+hash -d pp=$HOME/pictures
+hash -d vv=$HOME/videos
 hash -d b=$HOME/.local/bin
 hash -d cf=${XDG_CONFIG_HOME:-$HOME/.config}
 hash -d cs=${XDG_CONFIG_HOME:-$HOME/.config}/shortcuts

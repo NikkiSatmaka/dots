@@ -103,7 +103,7 @@ apps()
 mkxdg()
 	{
 		cd ~
-		mkdir -pv ~/downloads ~/documents ~/music ~/pictures ~/pictures/screenshots ~/pictures/wallpapers ~/videos
+		mkdir -pv ~/desktop ~/downloads ~/documents ~/music ~/pictures ~/pictures/screenshots ~/pictures/wallpapers ~/videos
 	}
 
 movbg()

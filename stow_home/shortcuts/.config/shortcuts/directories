@@ -1,10 +1,10 @@
 # FOLDERS  #
 h	$HOME/
-d	$HOME/downloads
-D	$HOME/documents
-m	$HOME/music
-p	$HOME/pictures
-v	$HOME/videos
+D	$HOME/downloads
+d	$HOME/documents
+mm	$HOME/music
+pp	$HOME/pictures
+vv	$HOME/videos
 b	$HOME/.local/bin
 cf	${XDG_CONFIG_HOME:-$HOME/.config}
 cs	${XDG_CONFIG_HOME:-$HOME/.config}/shortcuts
