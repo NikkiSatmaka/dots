@@ -198,10 +198,9 @@ cmd stripspace %stripspace "$f"
 # Bindings
 # Remove some defaults
 map m
-map o
-map n
 map "'"
 map '"'
+map o
 map d
 map c
 map e
@@ -233,7 +232,7 @@ map dm mvdragon
 map dc cpdragon
 map dl dlfile
 
-map ss stripspace
+map s<space> stripspace
 
 # use enter for shell commands
 map <enter> shell
@@ -252,6 +251,8 @@ map DD delete
 map p paste
 map x cut
 map y copy
+map X moveto
+map Y copyto
 map <enter> open
 map mf push :mkfile<space>
 map mr push :sudomkfile<space>
@@ -259,7 +260,7 @@ map md push :mkdir<space>
 map ms push :mkscript<space>
 map ch chmod
 map bg setbg
-map o open_config
+# map o open_config
 map r rename
 map cc push r<c-u> # new rename
 map H top
