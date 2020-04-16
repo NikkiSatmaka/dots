@@ -2,16 +2,22 @@
 
 # Default programs:
 export EDITOR="nvim"
+export VISUAL="nvim"
+export TERMINAL="alacritty"
+export READER="zathura"
+export VIDEO="mpv"
+export IMAGE="sxiv"
+export FILE="nnn"
+export COLORTERM="truecolor"
+export OPENER="xdg-open"
+export PAGER="less"
+export WM="bspwm"
 export BROWSER="brave"
 # if [ -n "$DISPLAY" ]; then
 # 	export BROWSER="brave"
 # else
 # 	export BROWSER="w3m"
 # fi
-export TERMINAL="alacritty"
-export READER="zathura"
-export WM="bspwm"
-export FILE="nnn"
 
 # ~/ Clean-up:
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.

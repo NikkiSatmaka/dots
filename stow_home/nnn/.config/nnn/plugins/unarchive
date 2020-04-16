@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+case "$1" in
+      *.zip) 7z x "$1" ;;
+      *.rar) unar "$1" ;;
+      *.tar.gz) tar -xzvf "$1" ;;
+      *.tar.bz2) tar -xjvf "$1" ;;
+      *.tar) tar -xvf "$1" ;;
+      *) echo "Unsupported format" ;;
+esac
