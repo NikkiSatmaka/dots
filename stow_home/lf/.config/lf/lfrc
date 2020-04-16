@@ -1,42 +1,63 @@
-# Luke's lf settings
-
-# Basic vars
-set shell bash
+# Basic Settings
+set shell zsh
+set preview true
+# set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
-set color256
-set icons
+set color256 true
+set drawbox true
+set icons true
 set period 1
 
 # Vars that depend on environmental variables
 $lf -remote "send $id set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope"
 
-# cmds/functions
+# Custom Functions
 cmd open ${{
     case $(file --mime-type $f -b) in
-	image/vnd.djvu|application/pdf|application/octet-stream) setsid zathura $fx >/dev/null 2>&1 & ;;
-    	text/troff) man ./ $f;;
+    	text/troff) groff -ms $f -T pdf > $f.pdf;;
         text/*) $EDITOR $fx;;
 	image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-	image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -aio 2>/dev/null | lf-select & ;;
-	audio/*) mpv $f ;;
-	video/*) setsid mpv $f -quiet >/dev/null 2>&1 & ;;
+  image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\)\(_large\)*$" | setsid sxiv -baio 2>/dev/null | lf-select & ;;
+	audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
+	video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
 	application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
         *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
     esac
 }}
 
+cmd rifle ${{
+    set -f
+    rifle -l $f
+    read -p "Select runner: " runner
+    rifle -p $runner $f
+}}
+
+cmd bulkrename ${{
+    vidir
+}}
+
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
-cmd delete ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	printf "%s\n\t" "$fx"
-	printf "delete?[y/N]"
+cmd mkfile $$EDITOR "$(echo $* | tr ' ' '\ ')"
+
+cmd sudomkfile $sudo $EDITOR "$(echo $* | tr ' ' '\ ')"
+
+cmd mkscript $mkscript "$(echo $* | tr ' ' '\ ')"
+
+cmd chmod ${{
+	clear
+	printf "Mode Bits: "
 	read ans
-	[ $ans = "y" ] && rm -rf $fx
+
+	for file in "$fx"
+	do
+	chmod $ans $file
+	done
 }}
+
+cmd setbg %setbg "$f"
 
 cmd moveto ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
@@ -56,33 +77,256 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
-cmd bulkrename ${{
-    vidir
+cmd imgur ${{ imgur.sh "$f" | xclip -selection clipboard
 }}
 
+cmd fzf_jump ${{
+  res="$(find . -maxdepth 3 | fzf --reverse --header='Jump to location')"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd broot_jump ${{
+  f=$(mktemp)
+  res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
+  rm -f "$f"
+  if [ -f "$res" ]; then
+    cmd="select"
+  elif [ -d "$res" ]; then
+    cmd="cd"
+  fi
+  lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd dragon %dragon-drag-and-drop -a -x $fx
+cmd cpdragon %cpdragon
+cmd mvdragon %mvdragon
+cmd dlfile %dlfile
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.tar) tar xvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# compress current file or selected files with tar
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar cvf $1.tar.xz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd targz ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czvf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with tar and bz2
+cmd tarbz2 ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar cjvf $1.tar.bz2 $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# Trash cli bindings
+cmd trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    # extract the substring from start of string up to delimiter.
+    # this is the first "element" of the string.
+    file=${files%%;*}
+
+    trash-put "$(basename "$file")"
+    # if there's only one element left, set `files` to an empty string.
+    # this causes us to exit this `while` loop.
+    # else, we delete the first "element" of the string from files, and move onto the next.
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+
+cmd clear_trash ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	# printf "%s\n\t" "$fx"
+	trash-list
+	printf "empty Trash?[y/N]"
+	read ans
+	[ $ans = "y" ] && trash-empty
+}}
+
+cmd restore_trash ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	trash-restore
+}}
+
+cmd stripspace %stripspace "$f"
+
 # Bindings
-map <c-f> $lf -remote "send $id select '$(fzf)'"
-map J $lf -remote "send $id cd $(cut -d'	' -f2 ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
-map gh
-map g top
-map D delete
-map C copyto
-map M moveto
-map <c-n> push :mkdir<space>
-map <c-r> reload
+# Remove some defaults
+map m
+map o
+map n
+map "'"
+map '"'
+map d
+map c
+map e
+map f
+
+# File Openers
+map ee $$EDITOR "$f"
+map u $view "$f"
+
+# Archive Mappings
+map az zip
+map at tar
+map ag targz
+map ab targz
+map au unarchive
+
+# Trash Mappings
+map dd trash
+map tc clear_trash
+map tr restore_trash
+map <delete> trash
+
+# Broot Mapping
+map f broot_jump
+
+# Dragon Mapping
+map dr dragon
+map dm mvdragon
+map dc cpdragon
+map dl dlfile
+
+map ss stripspace
+
+# use enter for shell commands
 map <enter> shell
-map x $$f
-map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
 
-map A rename # at the very end
-map c push A<c-u> # new rename
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extention
-map a push A<a-b> # after extention
-map b bulkrename
+# execute current file (must be executable)
+# map x $$f
+# map X !$f
 
-map <c-e> down
-map <c-y> up
-map V push :!nvim<space>
+# dedicated keys for file opener actions
+# map o &mimeopen $f
+# map O $mimeopen --ask $f
+
+# Basic Functions
+map . set hidden!
+map DD delete
+map p paste
+map x cut
+map y copy
+map <enter> open
+map mf push :mkfile<space>
+map mr push :sudomkfile<space>
+map md push :mkdir<space>
+map ms push :mkscript<space>
+map ch chmod
+map bg setbg
+map o open_config
+map r rename
+map cc push r<c-u> # new rename
+map H top
+map L bottom
+map R reload
+map C clear
+map U unselect
+
+# Movement
+map gtr cd $HOME/.local/share/Trash/files
+map gus cd /run/media/nikki
+
+map gv. cd $HOME/videos
+map gva cd $HOME/videos/anime
+
+map gy. cd $HOME/videos/youtube
+map gyt cd $HOME/videos/youtube/ToUpload
+map gyu cd $HOME/videos/youtube/Uploaded
+map gya cd $HOME/videos/youtube/asset
+map go. cd $HOME/videos/podcast
+map got cd $HOME/videos/podcast/ToUpload
+map gou cd $HOME/videos/podcast/Uploaded
+
+map gp. cd $HOME/pictures
+map gpm cd $HOME/pictures/mpvscreenshots
+map gpa cd $HOME/pictures/Anime
+map gps cd $HOME/pictures/screenshots
+
+map gw. cd $HOME/pictures/Wallpapers
+map gww cd $HOME/pictures/Wallpapers/Wallpapers
+map gwm cd $HOME/pictures/Wallpapers/MobileWallpapers
+
+map gt. cd $HOME/documents/Textbooks
+map gt1 cd $HOME/documents/Textbooks/1stYear
+map gt2 cd $HOME/documents/Textbooks/2ndYear
+map gt3 cd $HOME/documents/Textbooks/3rdYear
+map gu3 cd $HOME/documents/Uni/3rdYear
+map gd cd $HOME/documents
+
+map gD cd $HOME/downloads
+map ge cd $HOME/desktop
+
+map gs. cd $HOME/scripts
+map gsl cd $HOME/scripts/lf
+map gsa cd $HOME/scripts/alsa
+map gsi cd $HOME/scripts/i3
+map gse cd $HOME/scripts/lemonbar
+map gsp cd $HOME/scripts/polybar
+map gsb cd $HOME/scripts/bspwm
+map gsu cd $HOME/scripts/pulse
+map gdt cd $HOME/scripts/transmission
+
+map gr. cd $HOME/repos
+map grb cd $HOME/repos/bookmenu
+map grf cd $HOME/repos/cleanfullscreen
+map grm cd $HOME/repos/dmenu
+map grd cd $HOME/repos/dotfiles
+map gri cd $HOME/repos/init
+map grk cd $HOME/repos/kanban-board
+map grl cd $HOME/repos/lbryurlconvert
+map grP cd $HOME/repos/PerlProjects
+map grr cd $HOME/repos/reading-list
+map grs cd $HOME/repos/st
+map grw cd $HOME/repos/website
+
+map gc cd $HOME/.config
+map gC cd $HOME/cell
+map gE cd /etc
+map gU. cd /usr
+map gUs cd /usr/share

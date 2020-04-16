@@ -3,6 +3,7 @@
 PATH="$PATH:$HOME/.local/bin"
 PATH="$PATH:$HOME/.local/bin/bspwm"
 PATH="$PATH:$HOME/.local/bin/i3"
+PATH="$PATH:$HOME/.local/bin/lf"
 PATH="$PATH:$HOME/.local/bin/polybar"
 PATH="$PATH:$HOME/.local/cargo/bin"
 PATH="$PATH:/usr/local/go/bin"
