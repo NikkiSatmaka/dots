@@ -59,8 +59,8 @@ XF86Audio{Raise,Lower}Volume
 # 	mpc {pause,play,stop}
 # XF86Audio{Rewind,Forward}
 # 	mpc seek {-,+}10
-# XF86AudioRecord
-# 	dmenurecord
+XF86AudioRecord
+	pulsemixer --id source-1 --toggle-mute
 # XF86AudioMedia
 # 	$TERMINAL -e ncmpcpp
 XF86MonBrightness{Up,Down}

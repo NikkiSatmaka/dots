@@ -2,12 +2,12 @@
 set shell zsh
 set preview true
 # set previewer ${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope
-set shellopts '-eu'
+set shellopts '-eu:--shwordsplit'
 set ifs "\n"
 set scrolloff 10
-set color256 true
-set drawbox true
-set icons true
+set color256
+set drawbox
+set icons
 set period 1
 
 # Vars that depend on environmental variables
@@ -34,8 +34,50 @@ cmd rifle ${{
     rifle -p $runner $f
 }}
 
+#
+# Rename Functions
+#
+
 cmd bulkrename ${{
-    vidir
+    old=$(mktemp)
+    new=$(mktemp)
+    [ -n $fs ] && fs=$(ls)
+    printf "$fs\n" > $old
+    printf "$fs\n" > $new
+    $EDITOR $new
+    [ $(cat $new | wc -l) -ne $(cat $old | wc -l) ] && exit
+    paste $old $new | while read names; do
+        src=$(printf $names | cut -f1)
+        dst=$(printf $names | cut -f2)
+        [ $src = $dst ] && continue
+        [ -e $dst ] && continue
+        mv $src $dst
+    done
+    rm $old $new
+    lf -remote "send $id unselect"
+}}
+
+# Unmap the default binding
+# Rename the file with a completely different name
+
+# Edit the current filename
+cmd renameappend ${{
+	# get 'basename' of the selection
+	filename="${f##*/}"
+	# quote it so we won't deal with quotes in the lf -remote command
+	filename="$(printf '%q' "$filename")"
+	filename="${filename// /<space>}"
+	lf -remote "send $id push :rename<space>$filename"
+}}
+
+# Edit filename before the extension
+cmd renameextensions ${{
+	# get 'basename' of the selection
+	filename="${f##*/}"
+	# quote it so we won't deal with quotes in the lf -remote command
+	filename="$(printf '%q' "$filename")"
+	filename="${filename// /<space>}"
+	lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
 }}
 
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
@@ -197,6 +239,7 @@ cmd stripspace %stripspace "$f"
 
 # Bindings
 # Remove some defaults
+map r
 map m
 map "'"
 map '"'
@@ -253,7 +296,7 @@ map x cut
 map y copy
 map X moveto
 map Y copyto
-map <enter> open
+# map <enter> open
 map mf push :mkfile<space>
 map mr push :sudomkfile<space>
 map md push :mkdir<space>
@@ -261,8 +304,10 @@ map ms push :mkscript<space>
 map ch chmod
 map bg setbg
 # map o open_config
-map r rename
-map cc push r<c-u> # new rename
+map ra rename
+map re renameextensions
+map rc push :rename<space>
+map rb bulkrename
 map H top
 map L bottom
 map R reload
