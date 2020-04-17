@@ -103,7 +103,7 @@ apps()
 
 dash()
 	{
-		type dash >/dev/null 2>&1 || echo >&2 "Install dash first dude!"
+		command -v dash >/dev/null 2>&1 || { echo >&2 "Install dash first dude!" && exit 1 ;}
 		ln -sfT dash /usr/bin/sh
 	}
 
