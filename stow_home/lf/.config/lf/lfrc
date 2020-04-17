@@ -306,7 +306,7 @@ map bg setbg
 # map o open_config
 map ra rename
 map re renameextensions
-map rc push :rename<space>
+map rc push ra<c-u>
 map rb bulkrename
 map H top
 map L bottom

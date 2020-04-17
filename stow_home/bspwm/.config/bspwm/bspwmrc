@@ -67,4 +67,4 @@ bspc rule -a mpv state=pseudo_tiled
 bspc rule -a Zathura state=tiled
 
 ###---Autostart---###
-launchpolybar
+polylaunch
