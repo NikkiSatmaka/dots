@@ -220,7 +220,7 @@ cmd trash ${{
   done
 }}
 
-cmd clear_trash ${{
+cmd trash_clear ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	# printf "%s\n\t" "$fx"
@@ -230,7 +230,7 @@ cmd clear_trash ${{
 	[ $ans = "y" ] && trash-empty
 }}
 
-cmd restore_trash ${{
+cmd trash_restore ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	trash-restore
 }}
@@ -262,8 +262,8 @@ map au unarchive
 
 # Trash Mappings
 map dd trash
-map tc clear_trash
-map tr restore_trash
+map tc trash_clear
+map tr trash_restore
 map <delete> trash
 
 # Broot Mapping
