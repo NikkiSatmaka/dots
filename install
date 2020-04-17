@@ -13,6 +13,7 @@ menu()
 		echo "stow:    Restore Stow form dots"
 		echo "aur:     Use 'yay' to install all Hex's applications"
 		echo "apps:    Use 'pacman' to install all Hex's applications"
+		echo "dash:    Symlink /bin/sh to /bin/dash"
 		echo "mkxdg:   Create xdg user base directories"
 		echo "movbg:   Set default background"
 		echo "syms:    THIS WILL DELETE FOLDERS YOU ARE USING! (uses Dropbox!)"
@@ -98,6 +99,12 @@ aur()
 apps()
 	{
 		test -f ~/pkgs-arch && sudo pacman -S --needed - < ~/pkgs-arch || echo "Do dots & stow first dude!"
+	}
+
+dash()
+	{
+		type dash >/dev/null 2>&1 || echo >&2 "Install dash first dude!"
+		ln -sfT dash /usr/bin/sh
 	}
 
 mkxdg()
