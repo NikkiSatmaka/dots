@@ -2,10 +2,6 @@
 # ~/.zprofile
 #
 
-for File in "$HOME"/.config/sh/*; do
-	. "$File"
-done
-
 # Start graphical server on tty1 if not already running.
 if command -v startx > /dev/null 2>&1; then
 	[ "$(tty)" = "/dev/tty1" ] && ! ps -e | grep -qw Xorg && exec startx
