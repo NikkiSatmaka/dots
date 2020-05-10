@@ -155,9 +155,9 @@
 !*.color256: 0#1d2021
 !*.color257: 15#ebdbb2
 
-! Base16 Tomorrow Night
-! Scheme: Chris Kempson (http://chriskempson.com)
-
+!! Base16 Tomorrow Night
+!! Scheme: Chris Kempson (http://chriskempson.com)
+!
 !#define base00 #1d1f21
 !#define base01 #282a2e
 !#define base02 #373b41
@@ -174,7 +174,7 @@
 !#define base0D #81a2be
 !#define base0E #b294bb
 !#define base0F #a3685a
-
+!
 !*foreground:   base05
 !#ifdef background_opacity
 !*background:   [background_opacity]base00
@@ -182,7 +182,7 @@
 !*background:   base00
 !#endif
 !*cursorColor:  base05
-
+!
 !*color0:       base00
 !*color1:       base08
 !*color2:       base0B
@@ -191,6 +191,7 @@
 !*color5:       base0E
 !*color6:       base0C
 !*color7:       base05
+!
 !*color8:       base03
 !*color9:       base08
 !*color10:      base0B
@@ -199,7 +200,7 @@
 !*color13:      base0E
 !*color14:      base0C
 !*color15:      base07
-
+!
 !! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
 !! use 'shell' template to set these if necessary
 !*color16:      base09
