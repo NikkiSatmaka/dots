@@ -15,6 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
 "{{ Colors }}
 	Plug 'morhetz/gruvbox'
 	Plug 'chriskempson/base16-vim'
+	Plug 'arcticicestudio/nord-vim'
 "{{ Stylize }}
 	" Plug 'vim-airline/vim-airline'
 	" Plug 'vim-airline/vim-airline-themes'
@@ -64,10 +65,15 @@ let g:indent_guides_enable_on_vim_startup = 1
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#wordcount#enabled = 1
 " let g:airline_theme = 'base16_tomorrow'
+" let g:airline_theme = 'nord'
 
 let g:lightline = {
       \ 'colorscheme': 'Tomorrow_Night',
       \ }
+
+" let g:lightline = {
+"       \ 'colorscheme': 'nord',
+"       \ }
 
 let g:jedi#usages_command = "<A>z"
 let g:jedi#popup_on_dot = 1
@@ -120,6 +126,7 @@ set splitright
 set termguicolors
 set t_Co=256
 colorscheme base16-tomorrow-night
+" colorscheme nord
 highlight Normal guibg=NONE ctermbg=NONE
 
 " Syntastic recommends
@@ -263,8 +270,8 @@ nnoremap <silent> <A-l> :tabnext<CR>
 " Basic file system bindings {{{
 nnoremap gl $
 nnoremap gh 0
-" nnoremap gk H
-" nnoremap gj L
+nnoremap gk H
+nnoremap gj L
 
 map Y y$
 nnoremap j gj

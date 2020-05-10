@@ -20,9 +20,6 @@ shopt -s checkwinsize		# Automatically cd into typed directory.
 
 # [ -r /usr/share/bash-completion/bash_completion ] && . usr/share/bash-completion/bash_completion
 
-# Set Vi mode in bash shell
-set -o vi
-
 # Starship Prompt
 eval "$(starship init bash)"
 
