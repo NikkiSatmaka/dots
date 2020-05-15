@@ -3,6 +3,46 @@
 # Copy output of last command
 # alias c='"$(history | tail -2 | sed "s/  [0-9]*  //;2d")" > /tmp/cmdoutput && cat /tmp/cmdoutput | xsel -b && notify-send "Terminal" "Ouput Copied"'
 
+# Quick chmod ;-)
+alias rw-='chmod 600'
+alias rwx='chmod 700'
+alias r--='chmod 644'
+alias r-x='chmod 755'
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'
+alias -- -='cd -'
+
+# Shortcuts
+alias h="cd $HOME/ && ls"
+alias dl="cd $HOME/downloads && ls"
+alias d="cd $HOME/documents && ls"
+alias mm="cd $HOME/music && ls"
+alias pp="cd $HOME/pictures && ls"
+alias vv="cd $HOME/videos && ls"
+alias b="cd $HOME/.local/bin && ls -a"
+alias cf="cd ${XDG_CONFIG_HOME:-$HOME/.config} && ls -a"
+alias cs="cd ${XDG_CONFIG_HOME:-$HOME/.config}/shortcuts && ls -a"
+alias ss="cd $HOME/pictures/screenshots && ls"
+alias dx="cd $HOME/Dropbox && ls"
+alias o="cd $HOME/dots && ls -a"
+alias bos="cd $HOME/Dropbox/Documents/BOS && ls"
+alias st="cd /storage && ls"
+alias mn="cd /mnt && ls -a"
+alias sd="$EDITOR $XDG_CONFIG_HOME/shortcuts/directories"
+alias sf="$EDITOR $XDG_CONFIG_HOME/shortcuts/files"
+alias sc="$EDITOR $XDG_CONFIG_HOME/shortcuts/commands"
+alias sb="$EDITOR $XDG_CONFIG_HOME/bspwm/bspwmrc"
+alias sx="$EDITOR $XDG_CONFIG_HOME/sxhkd/sxhkdrc"
+alias sz="$EDITOR $ZDOTDIR/.zshrc"
+alias sv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
+alias sr="$EDITOR $XDG_CONFIG_HOME/ranger/rc.conf"
+alias sqb="$EDITOR $XDG_CONFIG_HOME/qutebrowser/config.py"
+
 # trash command
 alias trp='trash-put'
 alias tre='trash-empty'
@@ -19,15 +59,26 @@ alias yt="youtube-dl --add-metadata -i"
 alias yta="yt -x -f bestaudio/best"
 alias ffmpeg="ffmpeg -hide_banner"
 
+# alias spt='launchspt'
+
 # Colorize commands when possible.
-#alias l='lsd -hA --group-dirs first'
-alias ls='exa -Fh --group-directories-first'
-alias la='exa -Fha --group-directories-first'
-alias ll='exa -Fhla --group-directories-first'
-alias lsdf='exa -Fha .*(.)'
-alias spt='launchspt'
-alias grep='grep --color=auto'
-alias diff="diff --color=auto" \
+alias ls="exa -Fh --group-directories-first"
+alias l="exa -Fhl --group-directories-first"  # List all files colorized in long format
+alias la="exa -Fhla --group-directories-first"
+alias lad="exa -Fhd -- .*(/)"  # only show dot-directories
+alias lsa="exa -Fha -- .*(.)"  # only show dot-files
+alias lsd="exa -FhlD"  # only show directories
+alias lse="exa -Fhld -- *(/^F)"  # only show empty directories
+
+alias lsnew="exa -rthl -- *(.) | tail $@ 2&>/dev/null"  # only the newest files
+alias lsold="exa -rthl -- *(.) | head $@ 2&>/dev/null"   # display the oldest files
+alias lssmall="exa -hl --sort=size -- *(.) | tail $@ 2&>/dev/null"  # display the smallest files
+alias lsx="exa -l -- *(*) | head $@ 2&>/dev/null"        # only show executables
+alias lssuid="exa -l -- *(s,S) | head $@ 2&>/dev/null"   # only show suid-files
+alias lsbig="exa -hl --sort=size -- *(.) | grep -v total | head $@ 2&>/dev/null"    # display the biggest files
+
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
 # alias ccat="highlight --out-format=ansi"
 
 # Some other stuff
@@ -157,3 +208,70 @@ alias xpgopher="ssh hexdsl@206.189.5.169"
 alias rofitop="rofi -show top -modi top"
 # alias xp="xprop | grep -E "^(WM_CLASS|_NET_WM_NAME|WM_NAME)""
 alias instagram="instaloader --no-video-thumbnails --no-metadata-json --no-captions"
+
+# suffix aliases (needs Zsh >= 4.*).  Suffix aliases allow the shell
+# to run a command on a file by suffix, e.g 'alias -s ps=gv' makes
+# 'foo.ps' execute 'gv foo.ps'.
+if [[ $ZSH_VERSION == 5.<->* ]]; then
+	# some "file aliases"
+	alias -s {ogg,flac,mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}="mplayer -idx"
+	alias -s {ogg,flac,mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}="mpv"
+	alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}="mirage"
+	alias -s dvi=xdvi
+	alias -s pdf=xpdf
+	alias -s ps=gv
+	alias -s {htm,html,php,com,net,org,gov}="pick-web-browser"
+	alias -s tex=${EDITOR:-vi}
+	alias -s txt=${PAGER:-less}
+	# some global aliases for redirection
+	alias -g N="&>/dev/null"
+	alias -g 1N="1>/dev/null"
+	alias -g 2N="2>/dev/null"
+	alias -g DN="/dev/null"
+	alias -g PI="|"
+	# Paging with less / head / tail
+	alias -g LS='| less -S'
+	alias -g EL='|& less'
+	alias -g ELS='|& less -S'
+	alias -g TRIM='| cut -c 1-$COLUMNS'
+	alias -g H='| head'
+	alias -g HL='| head -n $(( +LINES ? LINES - 4 : 20 ))'
+	alias -g EH='|& head'
+	alias -g EHL='|& head -n $(( +LINES ? LINES - 4 : 20 ))'
+	alias -g TL='| tail -n $(( +LINES ? LINES - 4 : 20 ))'
+	alias -g ET='|& tail'
+	alias -g ETL='|& tail -n $(( +LINES ? LINES - 4 : 20 ))'
+	# Sorting / counting
+	alias -g C='| wc -l'
+	alias -g SS='| sort'
+	alias -g Su='| sort -u'
+	alias -g Sn='| sort -n'
+	alias -g Snr='| sort -nr'
+	# grep(1)'ing
+	for switches in {,i}{,l,L}{,r}{,v}; do
+		eval "alias -g  GG$switches='| egrep ${switches:+-$switches}'"
+		eval "alias -g EG$switches='|& egrep ${switches:+-$switches}'"
+		eval "alias -g XG$switches='| xargs egrep ${switches:+-$switches}'"
+		eval "alias -g X0G$switches='| xargs -0 egrep ${switches:+-$switches}'"
+	done
+	# awk
+	alias -g A1="| awk '{print \$1}'"
+	alias -g A2="| awk '{print \$2}'"
+	alias -g A3="| awk '{print \$3}'"
+	alias -g A4="| awk '{print \$4}'"
+	alias -g A5="| awk '{print \$5}'"
+	alias -g A6="| awk '{print \$6}'"
+	alias -g A7="| awk '{print \$7}'"
+	alias -g A8="| awk '{print \$8}'"
+	alias -g A9="| awk '{print \$9}'"
+	alias -g EA='|& awk '
+	alias -g EA1="|& awk '{print \$1}'"
+	alias -g EA2="|& awk '{print \$2}'"
+	alias -g EA3="|& awk '{print \$3}'"
+	alias -g EA4="|& awk '{print \$4}'"
+	alias -g EA5="|& awk '{print \$5}'"
+	alias -g EA6="|& awk '{print \$6}'"
+	alias -g EA7="|& awk '{print \$7}'"
+	alias -g EA8="|& awk '{print \$8}'"
+	alias -g EA9="|& awk '{print \$9}'"
+fi
