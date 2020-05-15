@@ -1,6 +1,8 @@
 # vim: filetype=sh
+
+# Shortcuts
 alias h="cd $HOME/ && ls"
-alias D="cd $HOME/downloads && ls"
+alias dl="cd $HOME/downloads && ls"
 alias d="cd $HOME/documents && ls"
 alias mm="cd $HOME/music && ls"
 alias pp="cd $HOME/pictures && ls"

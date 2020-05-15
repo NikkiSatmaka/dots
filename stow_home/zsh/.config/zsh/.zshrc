@@ -11,8 +11,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # Load aliases and shortcuts if existent.
+[ -f "$XDG_CONFIG_HOME/shortcuts/aliases" ] && source "$XDG_CONFIG_HOME/shortcuts/aliases"
 [ -f "$XDG_CONFIG_HOME/shortcuts/shortcuts" ] && source "$XDG_CONFIG_HOME/shortcuts/shortcuts"
-[ -f "$XDG_CONFIG_HOME/shortcuts/commands" ] && source "$XDG_CONFIG_HOME/shortcuts/commands"
 [ -f "$XDG_CONFIG_HOME/shortcuts/zshnameddirs" ] && source "$XDG_CONFIG_HOME/shortcuts/zshnameddirs"
 
 # Basic auto/tab complete:

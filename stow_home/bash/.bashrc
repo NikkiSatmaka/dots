@@ -14,8 +14,8 @@ shopt -s autocd		# Automatically cd into typed directory.
 shopt -s checkwinsize		# Automatically cd into typed directory.
 
 # Load aliases and shortcuts if existent.
+[ -f "$XDG_CONFIG_HOME/shortcuts/aliases" ] && source "$XDG_CONFIG_HOME/shortcuts/aliases"
 [ -f "$XDG_CONFIG_HOME/shortcuts/shortcuts" ] && source "$XDG_CONFIG_HOME/shortcuts/shortcuts"
-[ -f "$XDG_CONFIG_HOME/shortcuts/commands" ] && source "$XDG_CONFIG_HOME/shortcuts/commands"
 [ -f "$XDG_CONFIG_HOME/shortcuts/zshnameddirs" ] && source "$XDG_CONFIG_HOME/shortcuts/zshnameddirs"
 
 # [ -r /usr/share/bash-completion/bash_completion ] && . usr/share/bash-completion/bash_completion
