@@ -1,1 +1,1 @@
-/home/ns/.zsh/logout
+. ~/.zsh/logout

@@ -1,1 +1,1 @@
-/home/ns/.zsh/interactive
+. ~/.zsh/interactive

@@ -1,1 +1,1 @@
-/home/ns/.zsh/login
+. ~/.zsh/login
