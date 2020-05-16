@@ -1,0 +1,1 @@
+/home/ns/.zsh/logout

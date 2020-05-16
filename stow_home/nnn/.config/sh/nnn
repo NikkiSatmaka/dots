@@ -1,7 +1,0 @@
-#!/bin/sh
-
-export NNN_USE_EDITOR=1
-export NNN_OPENER=xdg-open
-export NNN_TRASH=1
-export NNN_COLORS="1234"
-export NNN_PLUG='o:fzopen;C:diffs;v:imgview;i:imgur;p:pdfview;m:mediainf;d:dragdrop;e:unarchive;s:suedit;c:cpfile'
