@@ -24,16 +24,19 @@ export BROWSER=brave
 # ~/ Clean-up:
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
+export NMBGIT="${XDG_DATA_HOME:-$HOME/.local/share}/notmuch/nmbug"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
 export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/inputrc"
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/readline/inputrc"
 export ALSA_CONFIG_PATH="${XDG_CONFIG_HOME:-$HOME/.config}/alsa/asoundrc"
-#export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/pass"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
+
+# GnuPG
+export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
+gpg2 --homedir "${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
@@ -46,10 +49,16 @@ export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 # java fixes
 export _JAVA_AWT_WM_NONREPARENTING=1
 
+# npm
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
+
 # ruby gem
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/gem"
+
+# go
+export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 
 # Android SDK
 export ANDROID_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
