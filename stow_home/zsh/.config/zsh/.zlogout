@@ -1,1 +1,1 @@
-. ~/.zsh/logout
+logout

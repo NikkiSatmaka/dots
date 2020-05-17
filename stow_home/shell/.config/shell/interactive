@@ -39,4 +39,4 @@ if [ "$COLORTERM" = gnome-terminal -a "$TERM" = xterm ]; then
     export TERM=xterm-256color
 fi
 
-ssource ~/.shell/interactive_local
+ssource ~/.config/shell/interactive_local

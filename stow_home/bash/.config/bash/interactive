@@ -7,7 +7,7 @@
 # Load Bash It
 # . $BASH_IT/bash_it.sh
 
-. ~/.shell/interactive
+. ~/.config/shell/interactive
 
 HISTCONTROL=ignoredups
 HISTSIZE=10000

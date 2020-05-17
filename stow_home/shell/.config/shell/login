@@ -52,4 +52,4 @@ pathprepend ~/include CPATH
 pathremove . PATH
 pathremove "" PATH
 
-ssource ~/.shell/login_local
+ssource ~/.config/shell/login_local

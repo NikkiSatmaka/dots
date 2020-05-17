@@ -8,9 +8,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-. ~/.shell/interactive
+. ~/.config/shell/interactive
 
-ssource ~/.zsh/interactive_local
+ssource ~/.config/zsh/interactive_local
 
 # Automatically cd into typed directory.
 setopt autocd
