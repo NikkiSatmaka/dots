@@ -61,6 +61,10 @@
 	mnemonicPrefix = true
 	wordRegex = "[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"
 	compactionHeuristic = true
+	tool = nvimdiff
+
+[difftool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [color]
 	ui = true
@@ -80,7 +84,11 @@
 
 [merge]
 	defaultToUpstream = true
-	tool = vimdiff
+	tool = nvim
+	args = '-d'
+
+[mergetool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [commit]
   template = ~/.config/git/message
