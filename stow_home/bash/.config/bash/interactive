@@ -11,7 +11,9 @@
 
 HISTCONTROL=ignoredups
 HISTSIZE=10000
+HISTDIR="${XDG_DATA_HOME:-$HOME/.local/share}/bash"
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/bash/history"
+[[ ! -d $HISTDIR ]] && command mkdir -p "$HISTDIR"
 
 # Enable starship prompt.
 eval "$(starship init bash)"
